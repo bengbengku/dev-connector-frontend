@@ -2,11 +2,11 @@ import React from 'react';
 import PageContent from '../../components/pageContent';
 import Navbar from '../../components/navbar';
 
-const Home = () => {
+const Home = ({ posts, getAllPosts }) => {
   return (
     <>
       <Navbar />
-      <PageContent />
+      <PageContent posts={posts} getAllPosts={getAllPosts} />
     </>
   );
 };

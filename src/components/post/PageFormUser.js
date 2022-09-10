@@ -3,7 +3,7 @@ import React from 'react';
 import Navbar from '../navbar';
 import LeftFormUser from './LeftFormUser';
 
-const PageFormUser = () => {
+const PageFormUser = ({ posts, dispatch }) => {
   return (
     <>
       <Navbar />
@@ -15,7 +15,7 @@ const PageFormUser = () => {
             w={{ base: '100%', md: '75%' }}
             mr={{ base: 0, md: 6 }}
           >
-            <LeftFormUser />
+            <LeftFormUser posts={posts} dispatch={dispatch} />
           </Flex>
           {/* right-side */}
           <Flex

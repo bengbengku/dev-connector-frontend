@@ -127,7 +127,6 @@ const TextInputs = ({
             height="34px"
             padding="0 30px"
             disabled={loading}
-            isLoading={loading}
             variant="outline"
             mr={1}
           >
@@ -137,7 +136,7 @@ const TextInputs = ({
         <Button
           height="34px"
           padding="0 30px"
-          disabled={loading}
+          disabled={loading || (title === '') & (text === '')}
           isLoading={loading}
           _hover={{ bg: !loading ? 'gray.500' : '' }}
           onClick={() => {
