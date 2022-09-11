@@ -27,6 +27,7 @@ const UserMenu = ({ user }) => {
     dispatch({
       type: 'LOGOUT',
     });
+    navigate(0);
   };
 
   const signOrRegister = () => {

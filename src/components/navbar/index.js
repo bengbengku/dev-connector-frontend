@@ -18,6 +18,9 @@ const Navbar = () => {
       height="44px"
       padding="6px 12px"
       justify={{ md: 'space-between' }}
+      position="sticky"
+      top="0"
+      zIndex={99}
     >
       <Link to="/">
         <Image

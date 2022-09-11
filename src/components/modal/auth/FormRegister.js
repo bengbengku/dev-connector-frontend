@@ -23,6 +23,7 @@ import { useDispatch } from 'react-redux';
 
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 const userInfos = {
   first_name: '',
@@ -34,6 +35,7 @@ const userInfos = {
 
 const FormRegister = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
   const colSpan = useBreakpointValue({ base: 2, md: 1 });
@@ -81,6 +83,7 @@ const FormRegister = () => {
       Cookies.set('user', JSON.stringify(data));
       dispatch({ type: 'REGISTER_HIDE' });
       setLoading(false);
+      navigate(0);
       toast({
         title: 'Member cuy connector.',
         description: `Hai👋 selamat bergabung ${data.first_name}.`,

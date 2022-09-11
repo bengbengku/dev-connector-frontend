@@ -72,6 +72,7 @@ const FormLogin = () => {
         duration: 5000,
         isClosable: true,
       });
+      navigate(0);
     } catch (error) {
       setLoading(false);
       setError(error.response.data.message);

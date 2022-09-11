@@ -21,16 +21,16 @@ const PageContent = ({ posts, getAllPosts }) => {
         >
           <LeftHandSide user={user} />
           {posts?.map((post, i) => (
-            <Post key={i} post={post} user={user} />
+            <Post key={i} post={post} />
           ))}
         </Flex>
         {/* right-side */}
         <Flex
           direction="column"
           display={{ base: 'none', md: 'flex' }}
-          flexGrow={1}
+          width="350px"
         >
-          <RightHandSide />
+          <RightHandSide user={user} />
         </Flex>
       </Flex>
     </Flex>
