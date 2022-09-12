@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import { postsReducer } from './functions/reducers';
 import Home from './pages/home';
 import CreatePost from './pages/post';
+import Profile from './pages/profile';
 import LoggedInRoutes from './routes/LoggedInRoutes';
 import NotLoggedInRoutes from './routes/NotLoggedInRoutes';
 
@@ -49,7 +50,10 @@ function App() {
           element={<CreatePost posts={posts} dispatch={dispatch} />}
           exact
         />
+        <Route path="/profile" element={<Profile />} exact />
+        <Route path="/profile/:username" element={<Profile />} exact />
       </Route>
+
       <Route
         path="/"
         element={<Home posts={posts} getAllPosts={getAllPosts} />}

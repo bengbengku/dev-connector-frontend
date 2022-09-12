@@ -6,14 +6,14 @@ import AuthButtons from './AuthButtons';
 import IconsNavbar from './IconsNavbar';
 import UserMenu from './UserMenu';
 
-const RightContent = ({ loginModal, registerModal, user }) => {
+const RightContent = ({ loginModal, registerModal, user, page }) => {
   return (
     <>
       {loginModal && <LoginModal />}
       {registerModal && <RegisterModal />}
       <Flex justify="center" align="center">
         {user ? <IconsNavbar /> : <AuthButtons />}
-        <UserMenu user={user} />
+        <UserMenu user={user} page={page} />
       </Flex>
     </>
   );

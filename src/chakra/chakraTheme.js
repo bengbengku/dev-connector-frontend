@@ -45,7 +45,11 @@ export const theme = extendTheme({
   colors: {
     brand: {
       100: '#FF3c00',
+      200: '#DEE2E6',
     },
+    transparent: 'transparent',
+    black: '#000',
+    white: '#fff',
   },
   fonts: {
     body: `'Open Sans', sans-serif`,
@@ -53,7 +57,7 @@ export const theme = extendTheme({
   styles: {
     global: () => ({
       body: {
-        bg: '#DEE2E6',
+        bg: 'brand.200',
       },
     }),
   },

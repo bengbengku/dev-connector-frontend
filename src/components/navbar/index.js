@@ -8,7 +8,7 @@ import HomeDirectory from '../logo home/HomeDirectory';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({ page }) => {
   const { loginModal, registerModal, user } = useSelector(state => ({
     ...state,
   }));
@@ -36,6 +36,7 @@ const Navbar = () => {
       {user && <HomeDirectory />}
       <SearchInput user={user} />
       <RightContent
+        page={page}
         loginModal={loginModal}
         registerModal={registerModal}
         user={user}

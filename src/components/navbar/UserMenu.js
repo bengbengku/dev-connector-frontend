@@ -15,10 +15,10 @@ import { FcDecision, FcFlashOn } from 'react-icons/fc';
 import { CgProfile, CgEnter } from 'react-icons/cg';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
-const UserMenu = ({ user }) => {
+const UserMenu = ({ user, page }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -39,9 +39,13 @@ const UserMenu = ({ user }) => {
         cursor="pointer"
         padding="0 6px"
         borderRadius={4}
+        outline={`${page === 'profile' ? '1px solid' : 'none'}`}
+        outlineColor={`${page === 'profile' ? 'blue.600' : 'none'}`}
         _hover={{
           outline: `${user ? '1px solid' : 'none'}`,
-          outlineColor: `${user ? 'gray.300' : ''}`,
+          outlineColor: `${
+            user && page === 'profile' ? 'blue.600' : 'gray.300'
+          }`,
         }}
       >
         <Flex align="center">
@@ -80,16 +84,18 @@ const UserMenu = ({ user }) => {
       <MenuList>
         {user ? (
           <>
-            <MenuItem
-              fontSize="10pt"
-              fontWeight={700}
-              _hover={{ bg: 'gray.500' }}
-            >
-              <Flex align="center">
-                <Icon as={CgProfile} mr={2} fontSize={20} />
-                Profile
-              </Flex>
-            </MenuItem>
+            <Link to="/profile">
+              <MenuItem
+                fontSize="10pt"
+                fontWeight={700}
+                _hover={{ bg: 'gray.500' }}
+              >
+                <Flex align="center">
+                  <Icon as={CgProfile} mr={2} fontSize={20} />
+                  Profile
+                </Flex>
+              </MenuItem>
+            </Link>
             <MenuDivider />
             <MenuItem
               fontSize="10pt"

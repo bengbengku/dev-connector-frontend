@@ -1,4 +1,11 @@
-import { Button, Flex, Icon, Stack, Text } from '@chakra-ui/react';
+import {
+  Button,
+  Flex,
+  Icon,
+  Stack,
+  Text,
+  useMediaQuery,
+} from '@chakra-ui/react';
 import Moment from 'react-moment';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -15,13 +22,14 @@ import {
 } from '../../functions/post';
 import { useSelector } from 'react-redux';
 
-const Post = ({ post }) => {
+const Post = ({ post, deleteHandler, postRef }) => {
   const dispatch = useDispatch();
   const { user } = useSelector(state => ({ ...state }));
   const [visible, setVisible] = useState(false);
   const [reacts, setReacts] = useState();
   const [check, setCheck] = useState();
   const [total, setTotal] = useState(0);
+  const [isLargerThan409] = useMediaQuery('(max-width: 409px)');
 
   useEffect(() => {
     if (user) {
@@ -84,7 +92,7 @@ const Post = ({ post }) => {
       _hover={{ borderColor: 'gray.500' }}
       cursor="pointer"
     >
-      <Flex direction="column" p={2}>
+      <Flex direction="column" p={2} ref={postRef}>
         <Stack spacing={1} p="10px" w="100%">
           <Stack direction="row" spacing={0.6} align="center" fontSize="9pt">
             <Text color="gray.400">
@@ -97,7 +105,14 @@ const Post = ({ post }) => {
           <Text color="gray.600" fontSize="12pt" fontWeight={600}>
             {post?.title}
           </Text>
-          <Text color="gray.600" fontSize="12pt" textAlign="justify">
+          <Text
+            color="gray.600"
+            fontSize="12pt"
+            textAlign="justify"
+            width={`${
+              isLargerThan409 && post?.user._id === user?.id ? '95%%' : ''
+            }`}
+          >
             {post?.text.length > 160
               ? `${post?.text.substring(0, 160)}...`
               : post?.text}
@@ -160,7 +175,7 @@ const Post = ({ post }) => {
             </Flex>
           </Flex>
         </Stack>
-        <Flex ml={1} mb={1.5} color="gray.500" fontWeight={600}>
+        <Flex ml={1} mb={1.5} color="gray.500" fontWeight={600} flexWrap="wrap">
           <Flex align="center" p="8px 10px" cursor="pointer">
             <ReactsPopup
               visible={visible}
@@ -228,7 +243,7 @@ const Post = ({ post }) => {
             p="8px 10px"
             borderRadius={4}
             cursor="pointer"
-            flex={1}
+            flex={`${isLargerThan409 ? 'none' : 1}`}
           >
             <Icon as={BsChat} mr={2} _hover={{ color: 'gray.600' }} />
             <Text color="gray.400" fontWeight="normal" fontSize="10pt">
@@ -266,6 +281,7 @@ const Post = ({ post }) => {
               borderRadius={4}
               _hover={{ bg: 'gray.200' }}
               cursor="pointer"
+              onClick={() => deleteHandler(post?._id)}
             >
               <Icon as={AiOutlineDelete} mr={2} />
               <Text color="gray.400" fontWeight="normal" fontSize="10pt">

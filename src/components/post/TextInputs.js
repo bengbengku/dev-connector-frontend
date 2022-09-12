@@ -28,6 +28,8 @@ const TextInputs = ({
   handlePostSubmit,
   setPicker,
   picker,
+  handleTitleChange,
+  titleRemaining,
 }) => {
   const textRef = useRef(null);
   const emojiRef = useRef(null);
@@ -65,12 +67,12 @@ const TextInputs = ({
             bg: 'gray.300',
           }}
           value={title}
-          onChange={e => setTitle(e.target.value)}
+          onChange={handleTitleChange}
         />
         <InputRightElement width="4.5rem">
           <Stack direction="row">
-            <Badge variant="subtle" color="gray.400">
-              0/300
+            <Badge variant="subtle" color="gray.400" bg="none">
+              {titleRemaining}/100
             </Badge>
           </Stack>
         </InputRightElement>

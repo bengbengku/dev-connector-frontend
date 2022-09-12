@@ -13,7 +13,7 @@ const SearchInput = ({ user }) => {
         <Input
           color="gray.400"
           variant="filled"
-          bg="gray.200"
+          bg="brand.200"
           placeholder="Apa cari?"
           _placeholder={{ color: 'gray.400' }}
           _hover={{

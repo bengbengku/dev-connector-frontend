@@ -5,7 +5,7 @@ import Navbar from '../../components/navbar';
 const Home = ({ posts, getAllPosts }) => {
   return (
     <>
-      <Navbar />
+      <Navbar page="home" />
       <PageContent posts={posts} getAllPosts={getAllPosts} />
     </>
   );

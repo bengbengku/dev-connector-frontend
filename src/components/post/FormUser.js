@@ -34,9 +34,16 @@ const FormUser = ({ posts, dispatch }) => {
   const [error, setError] = useState('');
   const [picker, setPicker] = useState(false);
   const [title, setTitle] = useState('');
+  const [titleRemaining, setTitleRemaining] = useState(100);
   const [text, setText] = useState('');
   const [images, setImages] = useState([]);
   const toast = useToast();
+
+  const handleTitleChange = e => {
+    if (e.target.value.length > 100) return;
+    setTitle(e.target.value);
+    setTitleRemaining(100 - e.target.value.length);
+  };
 
   const handlePostSubmit = async () => {
     try {
@@ -144,6 +151,8 @@ const FormUser = ({ posts, dispatch }) => {
             text={text}
             setText={setText}
             handlePostSubmit={handlePostSubmit}
+            handleTitleChange={handleTitleChange}
+            titleRemaining={titleRemaining}
             setPicker={setPicker}
             picker={picker}
           />
