@@ -1,17 +1,13 @@
-import {
-  Avatar,
-  AvatarGroup,
-  Badge,
-  Flex,
-  Icon,
-  Stack,
-  Text,
-  Tooltip,
-} from '@chakra-ui/react';
-import React from 'react';
-import { BsCameraFill, BsHandIndexThumbFill } from 'react-icons/bs';
+import { Box, Button, Flex, Icon, Text, useDisclosure } from '@chakra-ui/react';
+import React, { useRef, useState } from 'react';
+import { BsCameraFill } from 'react-icons/bs';
+import { MdOutlineEditNote } from 'react-icons/md';
+import ProfilePicture from '../../components/profilePicture';
 
 const ProfilePictureInfos = ({ profile }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const profilePictureRef = React.useRef();
+  const pRef = useRef(null);
   return (
     //profile-img-wrap
     <Flex
@@ -21,7 +17,14 @@ const ProfilePictureInfos = ({ profile }) => {
       p="0 1rem"
       zIndex={99}
       w="full"
+      direction={{ base: 'column', md: 'row' }}
     >
+      <ProfilePicture
+        profilePictureRef={profilePictureRef}
+        isOpen={isOpen}
+        onClose={onClose}
+        pRef={pRef}
+      />
       {/* profile-w-left */}
       <Flex
         gap="1rem"
@@ -34,10 +37,11 @@ const ProfilePictureInfos = ({ profile }) => {
           position="relative"
           top="-5rem"
           justify={{ base: 'center', md: '' }}
-          transform={{ base: 'translateX(18px)' }}
+          transform={{ base: 'translateX(15px)' }}
         >
           {/* profile-w-bg */}
           <Flex
+            ref={pRef}
             backgroundSize="cover"
             bgImage={`${profile.picture}`}
             width="180px"
@@ -62,21 +66,15 @@ const ProfilePictureInfos = ({ profile }) => {
             border="2px solid"
             borderColor="white"
             _hover={{ filter: 'brightness(95%)' }}
+            onClick={onOpen}
           >
             <Icon as={BsCameraFill} color="#111" fontSize={22} />
           </Flex>
         </Flex>
         {/* profile-w-col */}
-        <Flex
-          transform={{ base: 'translateY(-72px)' }}
-          align={{ base: 'center', md: 'flex-start' }}
-        >
+        <Flex transform={{ base: 'translateY(-72px)' }} align="center">
           {/* profile-name */}
-          <Flex
-            w="full"
-            direction="column"
-            align={{ base: 'center', md: 'flex-start' }}
-          >
+          <Flex w="full" direction="column" align={{ base: 'center', md: '' }}>
             <Text color="gray.800" fontWeight={600}>
               {profile.first_name} {profile.last_name}
             </Text>
@@ -86,7 +84,15 @@ const ProfilePictureInfos = ({ profile }) => {
           </Flex>
         </Flex>
       </Flex>
-      {/* profile-w-left */}
+      {/* profile-w-right */}
+      <Box
+        display={{ base: 'column', md: 'flex' }}
+        transform={{ base: 'translateY(-60px)', md: '' }}
+      >
+        <Button h="30px" leftIcon={<MdOutlineEditNote fontSize={22} />}>
+          Edit Detail
+        </Button>
+      </Box>
     </Flex>
   );
 };

@@ -20,10 +20,6 @@ const formTabs = [
     title: 'Upload Photo',
     icon: FcAddImage,
   },
-  {
-    title: 'Link',
-    icon: FcBrokenLink,
-  },
 ];
 
 const FormUser = ({ posts, dispatch }) => {
