@@ -13,6 +13,7 @@ const Profile = () => {
   const { user } = useSelector(state => ({ ...state }));
   const { username } = useParams();
   const navigate = useNavigate();
+  const [photos, setPhotos] = useState({});
   let userName = username === undefined ? user.username : username;
   const [{ loading, error, profile }, dispatch] = useReducer(profileReducer, {
     loading: false,
@@ -23,6 +24,10 @@ const Profile = () => {
   useEffect(() => {
     getProfile();
   }, [username]);
+
+  const path = `${userName}/*`;
+  const max = 30;
+  const sort = 'desc';
 
   const getProfile = async () => {
     try {
@@ -40,6 +45,20 @@ const Profile = () => {
       if (data.ok === false) {
         navigate('/profile');
       } else {
+        try {
+          const images = await axios.post(
+            `${process.env.REACT_APP_BACKEND_URL}/listImages`,
+            { path, sort, max },
+            {
+              headers: {
+                Authorization: `Bearer ${user.token}`,
+              },
+            }
+          );
+          setPhotos(images.data);
+        } catch (error) {
+          console.log(error);
+        }
         dispatch({
           type: 'PROFILE_SUCCESS',
           payload: data.profile,
@@ -62,7 +81,11 @@ const Profile = () => {
         {/* profile-container */}
         <Flex maxWidth="945px" width="100%" margin="0 auto" direction="column">
           <Cover cover={profile.cover} />
-          <ProfilePictureInfos profile={profile} />
+          <ProfilePictureInfos
+            profile={profile}
+            photos={photos.resources}
+            getProfile={getProfile}
+          />
         </Flex>
       </Flex>
     </Flex>

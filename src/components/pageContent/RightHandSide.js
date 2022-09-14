@@ -38,7 +38,7 @@ const RightHandSide = ({ user }) => {
   };
 
   return (
-    <Flex borderRadius={4} direction="column" position="sticky" top="-24.5rem">
+    <Flex borderRadius={4} direction="column" position="sticky" top="-20.2rem">
       <Flex
         p="6px 10px"
         align="flex-end"

@@ -4,6 +4,7 @@ import {
   Box,
   Button,
   Flex,
+  Image,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -26,8 +27,16 @@ import UpdateProfilePicture from './UpdateProfilePicture';
 import { uploadImages } from '../../functions/uploadImages';
 import { updateprofilePicture } from '../../functions/user';
 import Cookies from 'js-cookie';
+import './style.css';
 
-const ProfilePicture = ({ profilePictureRef, isOpen, onClose, pRef }) => {
+const ProfilePicture = ({
+  profilePictureRef,
+  isOpen,
+  onClose,
+  pRef,
+  photos,
+  getProfile,
+}) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const { user } = useSelector(state => ({ ...state }));
@@ -87,6 +96,7 @@ const ProfilePicture = ({ profilePictureRef, isOpen, onClose, pRef }) => {
           type: 'UPDATEPICTURE',
           payload: res[0].url,
         });
+        getProfile();
         onClose();
       } else {
         setLoading(false);
@@ -216,11 +226,73 @@ const ProfilePicture = ({ profilePictureRef, isOpen, onClose, pRef }) => {
                     </Tab>
                   </TabList>
                   <TabPanels>
-                    <TabPanel>
-                      <p>one!</p>
+                    <TabPanel
+                      display="flex"
+                      overflowY="auto"
+                      className="scrollbar"
+                    >
+                      <Box
+                        display="flex"
+                        gap={2}
+                        flexWrap="wrap"
+                        height="242px"
+                        p={4}
+                        ml={3}
+                      >
+                        {photos
+                          ?.filter(
+                            img =>
+                              img.folder === `${user.username}/profile_pictures`
+                          )
+                          .map(photo => (
+                            <Image
+                              src={photo.secure_url}
+                              key={photo.public_id}
+                              alt=""
+                              w="100px"
+                              height="100px"
+                              objectFit="cover"
+                              borderRadius={8}
+                              cursor="pointer"
+                              _hover={{ filter: 'brightness(110%)' }}
+                              onClick={() => setImage(photo.secure_url)}
+                            />
+                          ))}
+                      </Box>
                     </TabPanel>
-                    <TabPanel>
-                      <p>two!</p>
+                    <TabPanel
+                      display="flex"
+                      overflowY="auto"
+                      className="scrollbar"
+                    >
+                      <Box
+                        display="flex"
+                        gap={2}
+                        flexWrap="wrap"
+                        height="242px"
+                        p={4}
+                        ml={3.3}
+                      >
+                        {photos
+                          ?.filter(
+                            img =>
+                              img.folder !== `${user.username}/profile_pictures`
+                          )
+                          .map(photo => (
+                            <Image
+                              src={photo.secure_url}
+                              key={photo.public_id}
+                              alt=""
+                              w="100px"
+                              height="100px"
+                              objectFit="cover"
+                              borderRadius={8}
+                              cursor="pointer"
+                              _hover={{ filter: 'brightness(110%)' }}
+                              onClick={() => setImage(photo.secure_url)}
+                            />
+                          ))}
+                      </Box>
                     </TabPanel>
                   </TabPanels>
                 </Tabs>
@@ -245,6 +317,7 @@ const ProfilePicture = ({ profilePictureRef, isOpen, onClose, pRef }) => {
               variant="ghost"
               onClick={() => updateProfileImage()}
               isLoading={loading}
+              disabled={image === '' && true}
             >
               Simpan
             </Button>

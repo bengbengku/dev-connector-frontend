@@ -4,7 +4,7 @@ import { BsCameraFill } from 'react-icons/bs';
 import { MdOutlineEditNote } from 'react-icons/md';
 import ProfilePicture from '../../components/profilePicture';
 
-const ProfilePictureInfos = ({ profile }) => {
+const ProfilePictureInfos = ({ profile, photos, getProfile }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const profilePictureRef = React.useRef();
   const pRef = useRef(null);
@@ -24,6 +24,8 @@ const ProfilePictureInfos = ({ profile }) => {
         isOpen={isOpen}
         onClose={onClose}
         pRef={pRef}
+        photos={photos}
+        getProfile={getProfile}
       />
       {/* profile-w-left */}
       <Flex
