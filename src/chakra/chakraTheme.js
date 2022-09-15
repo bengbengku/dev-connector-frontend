@@ -64,4 +64,7 @@ export const theme = extendTheme({
   components: {
     Button: { ...buttonSelectStyles },
   },
+  config: {
+    initialColorMode: 'dark',
+  },
 });

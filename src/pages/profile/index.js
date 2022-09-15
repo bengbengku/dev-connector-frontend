@@ -80,7 +80,7 @@ const Profile = () => {
       <Flex boxShadow="0 1px 2px rgba(0, 0, 0, 0.2)" bg="white">
         {/* profile-container */}
         <Flex maxWidth="945px" width="100%" margin="0 auto" direction="column">
-          <Cover cover={profile.cover} />
+          <Cover cover={profile.cover} dispatch={dispatch} profile={profile} />
           <ProfilePictureInfos
             profile={profile}
             photos={photos.resources}

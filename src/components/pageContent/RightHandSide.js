@@ -54,13 +54,14 @@ const RightHandSide = ({ user }) => {
       </Flex>
       <Flex direction="column" bg="white" borderRadius={4}>
         {users?.slice(0, 5).map((cuy, i, arr) => (
-          <Link to="/" key={cuy?._id}>
+          <Link to={`/profile/${cuy?.username}`} key={cuy?._id}>
             <Flex
               align="center"
               fontSize="10pt"
               borderBottom="1px solid"
               borderColor={arr.length - 1 === i ? '' : 'gray.300'}
               p="10px 12px"
+              _hover={{ bg: 'gray.200' }}
             >
               <Flex align="center" width="80%">
                 <Flex width="15%">

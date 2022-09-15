@@ -1,0 +1,14 @@
+.cover_cropper {
+  height: 100%;
+}
+
+.cover_cropper img {
+  object-fit: cover;
+  width: 100%;
+}
+
+.cover_cropper .reactEasyCrop_Container {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  height: 100%;
+}

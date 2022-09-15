@@ -39,13 +39,9 @@ const UserMenu = ({ user, page }) => {
         cursor="pointer"
         padding="0 6px"
         borderRadius={4}
-        outline={`${page === 'profile' ? '1px solid' : 'none'}`}
-        outlineColor={`${page === 'profile' ? 'blue.600' : 'none'}`}
         _hover={{
-          outline: `${user ? '1px solid' : 'none'}`,
-          outlineColor: `${
-            user && page === 'profile' ? 'blue.600' : 'gray.300'
-          }`,
+          outline: '1px solid',
+          outlineColor: 'gray.300',
         }}
       >
         <Flex align="center">
@@ -90,7 +86,7 @@ const UserMenu = ({ user, page }) => {
                 fontWeight={700}
                 _hover={{ bg: 'gray.500' }}
               >
-                <Flex align="center">
+                <Flex align="center" color="white">
                   <Icon as={CgProfile} mr={2} fontSize={20} />
                   Profile
                 </Flex>
@@ -105,7 +101,7 @@ const UserMenu = ({ user, page }) => {
                 logout();
               }}
             >
-              <Flex align="center">
+              <Flex align="center" color="white">
                 <Icon as={CgEnter} mr={2} fontSize={20} />
                 Log Out
               </Flex>
