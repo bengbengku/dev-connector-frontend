@@ -50,7 +50,7 @@ const ProfilePictureInfos = ({ profile, photos, getProfile }) => {
             height="180px"
             borderRadius="50%"
             backgroundRepeat="no-repeat"
-            border="2px solid"
+            border="3px solid"
             borderColor="white"
             cursor="pointer"
             _hover={{ filter: 'brightness(95%)' }}

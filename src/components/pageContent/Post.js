@@ -1,11 +1,4 @@
-import {
-  Button,
-  Flex,
-  Icon,
-  Stack,
-  Text,
-  useMediaQuery,
-} from '@chakra-ui/react';
+import { Flex, Icon, Stack, Text, useMediaQuery } from '@chakra-ui/react';
 import Moment from 'react-moment';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -110,7 +103,7 @@ const Post = ({ post, deleteHandler, postRef }) => {
             fontSize="12pt"
             textAlign="justify"
             width={`${
-              isLargerThan409 && post?.user._id === user?.id ? '95%%' : ''
+              isLargerThan409 && post?.user._id === user?.id ? '95%' : ''
             }`}
           >
             {post?.text.length > 160

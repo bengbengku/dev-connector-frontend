@@ -168,7 +168,10 @@ const ProfilePicture = ({
         onClose={onClose}
         isCentered
       >
-        <ModalOverlay />
+        <ModalOverlay
+          bg="blackAlpha.400"
+          backdropFilter="blur(10px) hue-rotate(90deg)"
+        />
         <ModalContent>
           <ModalHeader>Update Photo Profile</ModalHeader>
           <ModalCloseButton />

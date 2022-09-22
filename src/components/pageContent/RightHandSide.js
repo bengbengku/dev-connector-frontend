@@ -2,16 +2,19 @@ import { Box, Button, Flex, Icon, Image, Text } from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useEffect, useReducer } from 'react';
 import { BsBoxArrowUpRight } from 'react-icons/bs';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getUsersReducer } from '../../functions/reducers';
 import FooterContent from './FooterContent';
 import RightDiscord from './RightDiscord';
 const RightHandSide = ({ user }) => {
+  const dispatchLink = useDispatch();
   const [{ loading, error, users }, dispatch] = useReducer(getUsersReducer, {
     loading: false,
     users: [],
     error: '',
   });
+
   useEffect(() => {
     getAllUsers();
   }, []);
@@ -37,6 +40,15 @@ const RightHandSide = ({ user }) => {
     }
   };
 
+  const handleLinkUser = () => {
+    if (!user) {
+      return dispatchLink({
+        type: 'LOGIN_SHOW',
+        payload: true,
+      });
+    }
+  };
+
   return (
     <Flex borderRadius={4} direction="column" position="sticky" top="-20.2rem">
       <Flex
@@ -54,7 +66,11 @@ const RightHandSide = ({ user }) => {
       </Flex>
       <Flex direction="column" bg="white" borderRadius={4}>
         {users?.slice(0, 5).map((cuy, i, arr) => (
-          <Link to={`/profile/${cuy?.username}`} key={cuy?._id}>
+          <Link
+            to={`/profile/${cuy?.username}`}
+            key={cuy?._id}
+            onClick={() => handleLinkUser()}
+          >
             <Flex
               align="center"
               fontSize="10pt"

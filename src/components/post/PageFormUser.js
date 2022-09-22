@@ -2,6 +2,7 @@ import { Box, Flex, Text } from '@chakra-ui/react';
 import React from 'react';
 import Navbar from '../navbar';
 import LeftFormUser from './LeftFormUser';
+import RightPostUser from './RightPostUser';
 
 const PageFormUser = ({ posts, dispatch }) => {
   return (
@@ -12,18 +13,18 @@ const PageFormUser = ({ posts, dispatch }) => {
           {/* left-side */}
           <Flex
             direction="column"
-            w={{ base: '100%', md: '75%' }}
+            w={{ base: '100%', md: '65%' }}
             mr={{ base: 0, md: 6 }}
           >
             <LeftFormUser posts={posts} dispatch={dispatch} />
           </Flex>
           {/* right-side */}
           <Flex
+            flex={1}
             direction="column"
             display={{ base: 'none', md: 'flex' }}
-            flexGrow={1}
           >
-            Hello
+            <RightPostUser />
           </Flex>
         </Flex>
       </Flex>

@@ -8,6 +8,7 @@ import { Flex, Icon, Image, Stack, Text } from '@chakra-ui/react';
 
 import Cover from './Cover';
 import ProfilePictureInfos from './ProfilePictureInfos';
+import ProfileDetails from './ProfileDetails';
 
 const Profile = () => {
   const { user } = useSelector(state => ({ ...state }));
@@ -80,7 +81,12 @@ const Profile = () => {
       <Flex boxShadow="0 1px 2px rgba(0, 0, 0, 0.2)" bg="white">
         {/* profile-container */}
         <Flex maxWidth="945px" width="100%" margin="0 auto" direction="column">
-          <Cover cover={profile.cover} dispatch={dispatch} profile={profile} />
+          <Cover
+            cover={profile.cover}
+            dispatch={dispatch}
+            profile={profile}
+            photo={photos.resources}
+          />
           <ProfilePictureInfos
             profile={profile}
             photos={photos.resources}
@@ -88,6 +94,7 @@ const Profile = () => {
           />
         </Flex>
       </Flex>
+      <ProfileDetails userName={userName} />
     </Flex>
   );
 };

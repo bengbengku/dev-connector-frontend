@@ -9,6 +9,7 @@ import {
   Text,
   Button,
   useMediaQuery,
+  useDisclosure,
 } from '@chakra-ui/react';
 import Cookies from 'js-cookie';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
@@ -21,18 +22,21 @@ import { uploadImages } from '../../functions/uploadImages';
 import { updateCover } from '../../functions/user';
 import useClickOutside from '../../helpers/clickOutside';
 import getCroppedImg from '../../helpers/getCroppedImg';
+import OldCover from './OldCover';
 import './style.css';
 
-const Cover = ({ cover, profile, dispatch }) => {
+const Cover = ({ cover, profile, dispatch, photo }) => {
   const { user } = useSelector(state => ({ ...state }));
   const [isMaxWidth448px] = useMediaQuery('(max-width: 448px)');
   const [showCoverMenu, setShowCoverMenu] = useState(false);
+  const [showOldCover, setShowOldCover] = useState(false);
   const [coverPicture, setCoverPicture] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const menuRef = useRef(null);
   const refInput = useRef(null);
   const coverRef = useRef(null);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   useClickOutside(menuRef, () => {
     setShowCoverMenu(false);
   });
@@ -312,6 +316,7 @@ const Cover = ({ cover, profile, dispatch }) => {
                 fontWeight={600}
                 transform="translateX(1.2px)"
                 _hover={{ color: 'gray.700' }}
+                onClick={onOpen}
               >
                 Pilih Photo
               </Text>
@@ -334,6 +339,13 @@ const Cover = ({ cover, profile, dispatch }) => {
             </Flex>
           </Flex>
         )}
+        <OldCover
+          photo={photo}
+          isOpen={isOpen}
+          onClose={onClose}
+          setCoverPicture={setCoverPicture}
+          coverPicture={coverPicture}
+        />
       </Flex>
     </Flex>
   );
